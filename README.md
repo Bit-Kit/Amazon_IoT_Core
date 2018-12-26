@@ -94,17 +94,17 @@ Wklejamy przykładowy kod:
     from AWSIoTPythonSDK.MQTTLib import AWSIoTMQTTClient
     #
     myMQTTClient = AWSIoTMQTTClient("basicPubSub")
-    #Pierwszy argument to "EndPoint",Subscription topic można sprawdzić poleceniem "$ aws iot describe-endpoint" w terminale
-    #Drugi argument to używany port protokołu MQTT + SSL (8883)
+    #Pierwszy argument to "EndPoint",Subscription topic mozna sprawdzic poleceniem "$ aws iot describe-endpoint" w terminale
+    #Drugi argument to uzywany port protokolu MQTT + SSL (8883)
     myMQTTClient.configureEndpoint("<Twój_EndPoint>-ats.iot.us-east-1.amazonaws.com", 8883) #443
-    #Należy podać certyfikat AWS("root-CA.crt"), klucz prywatny, certyfikat Rzeczy
+    #Nalezy podac certyfikat AWS("root-CA.crt"), klucz prywatny, certyfikat Rzeczy
     myMQTTClient.configureCredentials("root-CA.crt","2xxxxxxxx7.private.key","2xxxxxxxx7.cert.pem")
     myMQTTClient.configureOfflinePublishQueueing(-1)  # Infinite offline Publish queueing
     myMQTTClient.configureDrainingFrequency(2)  # Draining: 2 Hz
     myMQTTClient.configureConnectDisconnectTimeout(10)  # 10 sec
     myMQTTClient.configureMQTTOperationTimeout(5)  # 5 sec
     myMQTTClient.connect()
-    #Pierwszy argument to ścieżka do tematu, można użyć tej
+    #Pierwszy argument to sciezka do tematu, mozna uzyc tej
     #Drugi argument to komunikat
     #Trzeci to QoS (0;1)
     myMQTTClient.publish("Test/moja_rzecz", "Hello. Im working!", 1)
@@ -132,17 +132,17 @@ Obserwujemy w przeglądarce otszymany komunikat
     from AWSIoTPythonSDK.MQTTLib import AWSIoTMQTTClient
     #
     myMQTTClient = AWSIoTMQTTClient("basicPubSub")
-    #Pierwszy argument to "EndPoint",Subscription topic można sprawdzić poleceniem "$ aws iot describe-endpoint" w terminale
-    #Drugi argument to używany port protokołu MQTT + SSL (8883)
+    #Pierwszy argument to "EndPoint",Subscription topic mozna sprawdzic poleceniem "$ aws iot describe-endpoint" w terminale
+    #Drugi argument to uzywany port protokolu MQTT + SSL (8883)
     myMQTTClient.configureEndpoint("<Twój_EndPoint>-ats.iot.us-east-1.amazonaws.com", 8883) #443
-    #Należy podać certyfikat AWS("root-CA.crt"), klucz prywatny, certyfikat Rzeczy
+    #Nalezy podac certyfikat AWS("root-CA.crt"), klucz prywatny, certyfikat Rzeczy
     myMQTTClient.configureCredentials("root-CA.crt","2xxxxxxxx7.private.key","2xxxxxxxx7.cert.pem")
     myMQTTClient.configureOfflinePublishQueueing(-1)  # Infinite offline Publish queueing
     myMQTTClient.configureDrainingFrequency(2)  # Draining: 2 Hz
     myMQTTClient.configureConnectDisconnectTimeout(10)  # 10 sec
     myMQTTClient.configureMQTTOperationTimeout(5)  # 5 sec
     myMQTTClient.connect()
-    #Pierwszy argument to ścieżka do tematu, można użyć tej
+    #Pierwszy argument to sciezka do tematu, mozna uzyc tej
     #Drugi argument to komunikat
     #Trzeci to QoS (0;1)
     #myMQTTClient.publish("Test/moja_rzecz", "Hello. Im working!", 1)
