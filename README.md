@@ -6,6 +6,8 @@ Projekty z użyciem serwisu Amazon Internet of Things
     2. [Tworzenie certyfikatu](#make_cred)
     3. [Tworzenie polityki](#make_policy)    
 2. [Po stronie Rzeczy](#thing)
+    1. [Przykłąd wysyłania wiadomości do Broker-a](#send)
+    2. [Przykłąd otrzymania wiadomości od Broker-a](#recive)
 3. [Źródła](#zrodla)
 
 
@@ -78,10 +80,13 @@ Tworzymy folder do projektów:
   
     sudo curl https://www.amazontrust.com/repository/AmazonRootCA1.pem > root-CA.crt
    
+<a name="send"></a>
+## Przykłąd wysyłania komunikatu do Broker-a
+
 Tworzymy skrypt Python:
 
-    touch examle.py
-    nano examle.py
+    touch examle_send.py
+    nano examle_send.py
     
 Wklejamy przykładowy kod:
 
@@ -110,13 +115,59 @@ W przeglądarce wchodzimy do
 
 Na urządzeniu wówczas uruchomiamy skrypt:
 
-    python example.py
+    python examle_send.py
 
 Obserwujemy w przeglądarce otszymany komunikat
 
     
+<a name="recive"></a>
+## Przykłąd otrzymania wiadomości od Broker-a
+
+    touch examle_recive.py
+    nano examle_recive.py
+    
+ Wklejamy przykładowy kod:
+ 
+    #Importowanie biblioteki
+    from AWSIoTPythonSDK.MQTTLib import AWSIoTMQTTClient
+    #
+    myMQTTClient = AWSIoTMQTTClient("basicPubSub")
+    #Pierwszy argument to "EndPoint",Subscription topic można sprawdzić poleceniem "$ aws iot describe-endpoint" w terminale
+    #Drugi argument to używany port protokołu MQTT + SSL (8883)
+    myMQTTClient.configureEndpoint("<Twój_EndPoint>-ats.iot.us-east-1.amazonaws.com", 8883) #443
+    #Należy podać certyfikat AWS("root-CA.crt"), klucz prywatny, certyfikat Rzeczy
+    myMQTTClient.configureCredentials("root-CA.crt","2xxxxxxxx7.private.key","2xxxxxxxx7.cert.pem")
+    myMQTTClient.configureOfflinePublishQueueing(-1)  # Infinite offline Publish queueing
+    myMQTTClient.configureDrainingFrequency(2)  # Draining: 2 Hz
+    myMQTTClient.configureConnectDisconnectTimeout(10)  # 10 sec
+    myMQTTClient.configureMQTTOperationTimeout(5)  # 5 sec
+    myMQTTClient.connect()
+    #Pierwszy argument to ścieżka do tematu, można użyć tej
+    #Drugi argument to komunikat
+    #Trzeci to QoS (0;1)
+    #myMQTTClient.publish("Test/moja_rzecz", "Hello. Im working!", 1)
+
+    def customCallback(client, userdata, message):
+        print("Received a new message: ")
+        print(message.payload)
+        print("from topic: ")
+        print(message.topic)
+        print("--------------\n\n")
+
+    while True:
+        myMQTTClient.subscribe("Test/moja_rzecz", 1, customCallback)
+        pass
+
+Uruchomiamy skrypt:
+    
+    python examle_recive.py
 
 
+
+
+ 
+ 
+ 
 
 ---
 <a name="zrodla"></a>
