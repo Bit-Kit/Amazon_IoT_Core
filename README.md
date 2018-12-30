@@ -6,8 +6,8 @@ Projekty z użyciem serwisu Amazon Internet of Things
     2. [Tworzenie certyfikatu](#make_cred)
     3. [Tworzenie polityki](#make_policy)    
 2. [Po stronie Rzeczy](#thing)
-    1. [Przykłąd wysyłania wiadomości do Broker-a](#send)
-    2. [Przykłąd otrzymania wiadomości od Broker-a](#recive)
+    1. [Przykład wysyłania wiadomości do Broker-a](#send)
+    2. [Przykład otrzymania wiadomości od Broker-a](#recive)
 3. [Źródła](#zrodla)
 
 
@@ -81,12 +81,12 @@ Tworzymy folder do projektów:
     sudo curl https://www.amazontrust.com/repository/AmazonRootCA1.pem > root-CA.crt
    
 <a name="send"></a>
-## Przykłąd wysyłania komunikatu do Broker-a
+## Przykład wysyłania komunikatu do Broker-a
 
 Tworzymy skrypt Python:
 
-    touch examle_send.py
-    nano examle_send.py
+    touch example_send.py
+    nano example_send.py
     
 Wklejamy przykładowy kod:
 
@@ -115,16 +115,16 @@ W przeglądarce wchodzimy do
 
 Na urządzeniu wówczas uruchomiamy skrypt:
 
-    python examle_send.py
+    python example_send.py
 
 Obserwujemy w przeglądarce otszymany komunikat
 
     
 <a name="recive"></a>
-## Przykłąd otrzymania wiadomości od Broker-a
+## Przykład otrzymania wiadomości od Broker-a
 
-    touch examle_recive.py
-    nano examle_recive.py
+    touch example_recive.py
+    nano example_recive.py
     
  Wklejamy przykładowy kod:
  
@@ -160,7 +160,7 @@ Obserwujemy w przeglądarce otszymany komunikat
 
 Uruchomiamy skrypt:
     
-    python examle_recive.py
+    python example_recive.py
 
 
 
@@ -177,3 +177,4 @@ Uruchomiamy skrypt:
 * [Security and Identity for AWS IoT](https://docs.aws.amazon.com/iot/latest/developerguide/iot-security-identity.html)
 * [AWSIoTPythonSDK 1.4.1 documentation](https://s3.amazonaws.com/aws-iot-device-sdk-python-docs/html/index.html)
 * [X.509 Certificates and AWS IoT](https://docs.aws.amazon.com/iot/latest/developerguide/managing-device-certs.html#server-authentication)
+* [AWS in GitHub](https://github.com/aws/aws-iot-device-sdk-python)
